@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Engine — стартова сторінка",
-  description: "Базовий застосунок на Next.js і TypeScript.",
+  title: "Engine — робочий простір",
+  description: "Користувачі, організації та люди.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

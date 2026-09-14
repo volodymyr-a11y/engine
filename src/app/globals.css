@@ -1,52 +1,47 @@
-:root {
-  color-scheme: light;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #172033;
-  background: #f5f7fb;
-}
-
+:root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #172033; background: #f5f7fb; }
 * { box-sizing: border-box; }
 body { margin: 0; }
-main {
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
-.welcome {
-  width: 100%;
-  max-width: 680px;
-  padding: clamp(28px, 6vw, 64px);
-  background: #fff;
-  border: 1px solid #e0e5ef;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px #17203308;
-}
-.badge {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 100px;
-  background: #edf2ff;
-  color: #334ac0;
-  font-size: 14px;
-  font-weight: 600;
-}
-h1 {
-  margin: 24px 0 16px;
-  font-size: clamp(32px, 6vw, 52px);
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-}
-p { margin: 0 0 32px; color: #566176; line-height: 1.7; }
-code { font-size: 0.95em; overflow-wrap: anywhere; }
-a {
-  display: inline-block;
-  padding: 14px 20px;
-  border-radius: 12px;
-  background: #334ac0;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-a:hover { background: #263a9e; }
-a:focus-visible { outline: 3px solid #768cff; outline-offset: 4px; }
+a { color: #334ac0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { padding: 12px 20px; border: 0; border-radius: 10px; background: #334ac0; color: white; font: inherit; font-weight: 600; cursor: pointer; }
+button:hover { background: #263a9e; }
+button:disabled { opacity: .65; cursor: wait; }
+a:focus-visible, button:focus-visible { outline: 3px solid #768cff; outline-offset: 4px; }
+.login { min-height: 100svh; display: grid; place-items: center; padding: 24px; }
+.login .card { width: 100%; max-width: 580px; padding: clamp(24px, 5vw, 56px); }
+.card { display: block; padding: 28px; border: 1px solid #e0e5ef; border-radius: 18px; background: white; color: inherit; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #334ac0; }
+h1 { margin: 16px 0; font-size: clamp(32px, 5vw, 48px); letter-spacing: -.04em; }
+h2 { font-size: 20px; margin: 0 0 12px; }
+p { color: #566176; line-height: 1.7; margin: 0 0 24px; }
+.card p:last-child, .notice p:last-child { margin-bottom: 0; }
+header { display: flex; align-items: center; gap: 24px; padding: 20px 5%; background: white; border-bottom: 1px solid #e0e5ef; }
+header span { margin-left: auto; font-size: 14px; overflow-wrap: anywhere; }
+.brand { font-weight: 800; letter-spacing: .15em; }
+.secondary { background: #edf2ff; color: #334ac0; }
+.secondary:hover { background: #dce5ff; }
+nav { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 5%; border-bottom: 1px solid #e0e5ef; }
+nav a { padding: 10px 16px; border-radius: 8px; }
+nav a:hover { background: #e5ebf7; }
+.content { max-width: 1280px; margin: auto; padding: 48px 5%; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.notice { margin-top: 24px; padding: 28px; border: 1px solid #e7d7a4; border-radius: 18px; background: #fffbef; }
+dt { color: #566176; font-size: 14px; }
+dd { margin: 8px 0 20px; overflow-wrap: anywhere; }
+[role=alert] { margin-top: 20px; color: #a52626; }
+.search { margin: 32px 0 24px; }
+.search label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+.search div { display: flex; gap: 10px; max-width: 620px; }
+input { min-width: 0; flex: 1; padding: 11px 12px; border: 1px solid #cbd3e1; border-radius: 10px; background: white; color: inherit; font: inherit; }
+.account-list { display: grid; gap: 12px; }
+.account { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.account:hover { border-color: #9dabe0; text-decoration: none; }
+.roles { display: flex; flex-wrap: wrap; justify-content: end; gap: 6px; }
+.roles span { padding: 5px 8px; border-radius: 999px; background: #edf2ff; color: #334ac0; font-size: 12px; font-weight: 700; }
+.role-manager { margin-top: 20px; }
+.role-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 0; border-top: 1px solid #e0e5ef; }
+.role-row div { display: grid; gap: 4px; }
+.role-row span { color: #566176; font-size: 14px; }
+.role-row form { flex: 0 0 auto; }
+@media (max-width: 700px) { .search div, .account, .role-row { align-items: stretch; flex-direction: column; } .roles { justify-content: start; } }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } header { flex-wrap: wrap; gap: 16px; } header span { order: 3; width: 100%; } header form { margin-left: auto; } }
