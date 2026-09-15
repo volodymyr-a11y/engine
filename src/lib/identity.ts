@@ -34,3 +34,11 @@ export async function getIdentityAccount(id: string) {
   if (accountError || rolesError) { const error = accountError ?? rolesError; if (isMissingMigration(error)) throw new IdentityUnavailableError(); throw new Error("Не вдалося завантажити обліковий запис."); }
   return { account: ((account ?? [])[0] ?? null) as IdentityAccount | null, roles: (roles ?? []) as IdentityRole[] };
 }
+
+export async function getOwnIdentityProfile() {
+  const user = await requireUser();
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("identity_profiles").select("display_name").eq("id", user.id).maybeSingle();
+  if (error) { if (isMissingMigration(error)) throw new IdentityUnavailableError(); throw new Error("Не вдалося завантажити профіль."); }
+  return { user, displayName: data?.display_name ?? "" };
+}

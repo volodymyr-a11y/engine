@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireIdentityAdmin } from "@/lib/identity";
+import { requireUser } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
 
 function value(formData: FormData, key: string) { const result = formData.get(key); if (typeof result !== "string" || !result) throw new Error("Некоректні дані форми."); return result; }
 
@@ -20,4 +22,14 @@ export async function revokeRole(formData: FormData) {
   const { error } = await supabase.rpc("revoke_identity_role", { target_user_id: userId, target_role_key: roleKey });
   if (error) redirect(`/users/${userId}?error=revoke`);
   revalidatePath("/users"); revalidatePath(`/users/${userId}`); redirect(`/users/${userId}?notice=revoked`);
+}
+
+export async function updateDisplayName(formData: FormData) {
+  const displayName = formData.get("displayName");
+  if (typeof displayName !== "string" || displayName.trim().length > 120) redirect("/users/profile?error=name");
+  const user = await requireUser();
+  const supabase = await createClient();
+  const { error } = await supabase.from("identity_profiles").update({ display_name: displayName.trim() || null }).eq("id", user.id);
+  if (error) redirect("/users/profile?error=save");
+  revalidatePath("/users"); revalidatePath("/users/profile"); revalidatePath(`/users/${user.id}`); redirect("/users/profile?notice=saved");
 }
